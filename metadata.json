@@ -1,0 +1,8 @@
+{
+  "name": "Ocass Super APP - Votre plateforme de Ecommerce, Restaurant, Supermarché, Taxi et livraison",
+  "description": "Une plateforme multi-services pour la livraison de repas, le transport, les courses et les services financiers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
