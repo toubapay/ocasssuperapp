@@ -36,6 +36,7 @@ platform's modules and the three companion apps.
 │   │   ├── Footer.tsx           # Address, contact, site link
 │   │   └── SokhnaChat.tsx       # Floating chat widget calling POST /api/sokhna
 │   └── assets/images/favicon.svg
+├── public/videos/hero.mp4       # Hero background video, served as-is (not processed by Vite)
 ├── vite.config.ts               # Vite config: React + Tailwind plugins, GEMINI_API_KEY injection
 ├── tsconfig.json                # TS config: bundler resolution, react-jsx, noEmit (type-check only)
 ├── package.json                 # Scripts and dependencies (see below)
@@ -121,6 +122,11 @@ router. `SokhnaChat` maintains its own `history` state and POSTs to `/api/sokhna
 each message, mapping turns to Gemini's `role: "user" | "model"` convention to match
 what `server.ts` expects. Styling is Tailwind utility classes directly in JSX; there
 is no separate design-token or theme file.
+
+`Hero.tsx` plays a looping, muted, autoplaying background video (`/videos/hero.mp4`,
+served from `public/`) behind a translucent gradient overlay for text contrast — the
+video element degrades silently to the plain gradient if a browser can't decode it
+(e.g. an H.264/AAC-less Chromium build), so no fallback/poster handling is needed.
 
 ## AI Studio–Specific Conventions
 

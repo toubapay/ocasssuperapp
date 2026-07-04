@@ -5,8 +5,19 @@ export default function Hero() {
   const clientLink = APP_LINKS.find((a) => a.role === "Client")!.url;
 
   return (
-    <section className="bg-gradient-to-b from-emerald-900 to-emerald-800 text-white">
-      <div className="mx-auto max-w-6xl px-6 py-20 text-center">
+    <section className="relative overflow-hidden bg-emerald-900 text-white">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/videos/hero.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/90 via-emerald-900/80 to-emerald-900/90" />
+      <div className="relative mx-auto max-w-6xl px-6 py-20 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
