@@ -5,9 +5,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-emerald-900/10 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <div className="flex items-center text-2xl font-bold text-emerald-800">
-          <ShoppingCart size={28} strokeWidth={2.5} aria-hidden="true" />
-          <span>cass</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center text-2xl font-bold text-emerald-800">
+            <ShoppingCart size={28} strokeWidth={2.5} aria-hidden="true" />
+            <span>cass</span>
+          </div>
+          <span className="text-lg font-semibold text-emerald-900">Ocass Super App</span>
         </div>
         <div className="hidden items-center gap-5 text-sm text-emerald-900/80 md:flex">
           <a href={`tel:${CONTACT.phoneIntl.replace(/\s/g, "")}`} className="flex items-center gap-1.5 hover:text-emerald-700">
