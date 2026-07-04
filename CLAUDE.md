@@ -37,6 +37,7 @@ platform's modules and the three companion apps.
 │   │   └── SokhnaChat.tsx       # Floating chat widget calling POST /api/sokhna
 │   └── assets/images/favicon.svg
 ├── public/videos/hero.mp4       # Hero background video, served as-is (not processed by Vite)
+├── .github/workflows/ci.yml     # CI: npm ci, npm run lint, npm run build on push/PR
 ├── vite.config.ts               # Vite config: React + Tailwind plugins, GEMINI_API_KEY injection
 ├── tsconfig.json                # TS config: bundler resolution, react-jsx, noEmit (type-check only)
 ├── package.json                 # Scripts and dependencies (see below)
@@ -46,8 +47,9 @@ platform's modules and the three companion apps.
 └── .gitignore
 ```
 
-There is no test suite, no CI configuration, and no linter beyond TypeScript's own
-type-checker.
+There is no test suite and no linter beyond TypeScript's own type-checker. CI
+(`.github/workflows/ci.yml`) runs `npm run lint` and `npm run build` on every push
+to `main` and every pull request — it does not run tests, since none exist.
 
 ## Tech Stack
 
@@ -141,6 +143,7 @@ video element degrades silently to the plain gradient if a browser can't decode 
 ## Other Conventions
 
 - Path alias `@/*` → repo root (configured in both `tsconfig.json` and `vite.config.ts`).
-- No test framework or CI is set up — don't assume test commands exist or invent test
-  files unless asked to add a test setup.
-- No ESLint config — `npm run lint` is TypeScript type-checking only.
+- No test framework is set up — don't assume test commands exist or invent test files
+  unless asked to add a test setup.
+- No ESLint config — `npm run lint` is TypeScript type-checking only; that's also all
+  CI runs (plus `npm run build`) since there are no tests to run.
