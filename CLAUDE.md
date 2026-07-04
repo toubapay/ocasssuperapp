@@ -37,6 +37,7 @@ platform's modules and the three companion apps.
 │   │   └── SokhnaChat.tsx       # Floating chat widget calling POST /api/sokhna
 │   └── assets/images/favicon.svg
 ├── public/videos/hero.mp4       # Hero background video, served as-is (not processed by Vite)
+├── public/icons/                # PWA manifest icons (icon-192.png, icon-512.png, apple-touch-icon.png)
 ├── .github/workflows/ci.yml     # CI: npm ci, npm run lint, npm run build on push/PR
 ├── vite.config.ts               # Vite config: React + Tailwind plugins, GEMINI_API_KEY injection
 ├── tsconfig.json                # TS config: bundler resolution, react-jsx, noEmit (type-check only)
@@ -60,6 +61,8 @@ to `main` and every pull request — it does not run tests, since none exist.
 - **@google/genai 1.29** — Gemini API client (server-side only)
 - **motion**, **lucide-react** — animation (`motion/react`, used in `Hero.tsx` and
   `SokhnaChat.tsx`) and icons
+- **vite-plugin-pwa** — generates the web app manifest and service worker (see
+  PWA section below)
 - **tsx** (dev) / **esbuild** (prod bundling of `server.ts`)
 
 ## Dev Workflow
@@ -129,6 +132,19 @@ is no separate design-token or theme file.
 served from `public/`) behind a translucent gradient overlay for text contrast — the
 video element degrades silently to the plain gradient if a browser can't decode it
 (e.g. an H.264/AAC-less Chromium build), so no fallback/poster handling is needed.
+
+### Progressive Web App
+
+The `VitePWA` plugin (configured in `vite.config.ts`) makes this landing page
+installable ("Add to Home Screen") on mobile/desktop, with an emerald-branded
+standalone window, an app icon, and offline caching via an auto-generated service
+worker. **This is not the native Ocass Client/Marchand/Express app** referenced in
+`AppLinks.tsx` — those are separate Play Store apps with no code in this repo; the
+PWA only wraps this marketing site. Manifest icons live in `public/icons/` (not
+`src/assets/`) so their paths stay stable and un-hashed in the production build —
+follow that pattern for any future manifest/static assets referenced by exact path.
+`index.html` carries the iOS-specific meta tags (`apple-mobile-web-app-capable`,
+`apple-touch-icon`) since Safari doesn't read the web manifest for those.
 
 ## AI Studio–Specific Conventions
 
