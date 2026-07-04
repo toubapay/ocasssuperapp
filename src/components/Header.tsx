@@ -1,4 +1,4 @@
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, ShoppingCart } from "lucide-react";
 import { CONTACT } from "../lib/constants";
 
 export default function Header() {
@@ -6,8 +6,9 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-emerald-900/10 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-800 text-lg font-bold text-amber-300">
-            O
+          <div className="flex items-center text-2xl font-bold text-emerald-800">
+            <ShoppingCart size={28} strokeWidth={2.5} aria-hidden="true" />
+            <span>cass</span>
           </div>
           <span className="text-lg font-semibold text-emerald-900">Ocass Super App</span>
         </div>
