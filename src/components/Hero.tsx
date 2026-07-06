@@ -1,21 +1,58 @@
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { APP_LINKS } from "../lib/constants";
+
+const SLIDES = [
+  { type: "video", src: "/videos/hero.mp4" },
+  { type: "image", src: "/images/promo-banner.jpg" },
+] as const;
+
+const SLIDE_DURATION_MS = 7000;
 
 export default function Hero() {
   const clientLink = APP_LINKS.find((a) => a.role === "Client")!.url;
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSlide((s) => (s + 1) % SLIDES.length);
+    }, SLIDE_DURATION_MS);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-emerald-900 text-white">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="/videos/hero.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+      <AnimatePresence>
+        {SLIDES.map(
+          (s, i) =>
+            i === slide && (
+              <motion.div
+                key={i}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                aria-hidden="true"
+              >
+                {s.type === "video" ? (
+                  <video
+                    className="h-full w-full object-cover"
+                    src={s.src}
+                    poster="/images/promo-banner.jpg"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                  />
+                ) : (
+                  <img className="h-full w-full object-cover" src={s.src} alt="" />
+                )}
+              </motion.div>
+            ),
+        )}
+      </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/90 via-emerald-900/80 to-emerald-900/90" />
       <div className="relative mx-auto max-w-6xl px-6 py-20 text-center">
         <motion.h1

@@ -6,8 +6,10 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-emerald-900/10 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <div className="flex items-center gap-2">
-          <div className="flex items-center text-2xl font-bold text-emerald-800">
-            <ShoppingCart size={28} strokeWidth={2.5} aria-hidden="true" />
+          <div className="flex items-center text-2xl font-extrabold text-[#083b0d]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#083b0d]">
+              <ShoppingCart size={20} strokeWidth={2.3} className="text-[#eb8c2e]" aria-hidden="true" />
+            </span>
             <span>cass</span>
           </div>
           <span className="text-lg font-semibold text-emerald-900">Ocass Super App</span>

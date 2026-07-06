@@ -37,6 +37,7 @@ platform's modules and the three companion apps.
 │   │   └── SokhnaChat.tsx       # Floating chat widget calling POST /api/sokhna
 │   └── assets/images/favicon.svg
 ├── public/videos/hero.mp4       # Hero background video, served as-is (not processed by Vite)
+├── public/images/promo-banner.jpg  # Hero carousel promo slide (real Ocass marketing banner)
 ├── public/icons/                # PWA manifest icons (icon-192.png, icon-512.png, apple-touch-icon.png)
 ├── .github/workflows/ci.yml     # CI: npm ci, npm run lint, npm run build on push/PR
 ├── vite.config.ts               # Vite config: React + Tailwind plugins, GEMINI_API_KEY injection
@@ -128,10 +129,18 @@ each message, mapping turns to Gemini's `role: "user" | "model"` convention to m
 what `server.ts` expects. Styling is Tailwind utility classes directly in JSX; there
 is no separate design-token or theme file.
 
-`Hero.tsx` plays a looping, muted, autoplaying background video (`/videos/hero.mp4`,
-served from `public/`) behind a translucent gradient overlay for text contrast — the
-video element degrades silently to the plain gradient if a browser can't decode it
-(e.g. an H.264/AAC-less Chromium build), so no fallback/poster handling is needed.
+`Hero.tsx` is a background carousel (`SLIDES` array, auto-advances every
+`SLIDE_DURATION_MS`, crossfaded via `motion`'s `AnimatePresence`) alternating between
+the looping muted video (`/videos/hero.mp4`) and a static promo banner image
+(`/images/promo-banner.jpg`, the real Ocass marketing creative) — both sit behind
+the same translucent gradient overlay used for text contrast. The video degrades
+silently to its slide's plain background if a browser can't decode it (e.g. an
+H.264/AAC-less Chromium build), so no fallback/poster handling is needed.
+
+The brand mark (favicon, PWA icons, and the header wordmark) is modeled on the real
+Ocass logo found in that promo banner: a dark green (`#083b0d`) circle containing an
+orange (`#eb8c2e`) shopping-cart glyph, standing in for the letter "O" in "cass" —
+see `src/assets/images/favicon.svg` and `Header.tsx`.
 
 ### Progressive Web App
 
